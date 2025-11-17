@@ -21,15 +21,30 @@ Which columns should you include? Which information should be ignored?
 
 1. Work systematically row by row downwards from the top row
 2. Collect the information that will be the basis of the column headers of a structured table
-
 """
 
 
+extractor_prompt_template = """
+## Role
 
-description_csv_structure = """Based on the 
+You are a senior data scientist with an excellent eye for details.
 
+## Background
 
+The user provided a file containing data structured as comma separated values (csv). 
+{background}
+
+## Task
+
+Your task is to extract the data from the provided csv and its structure.
+
+## Instructions
+
+1. Work systematically row by row downwards from the top row
+2. Collect the information according to the wished table structure
 """
+
+
 
 
 

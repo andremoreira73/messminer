@@ -56,22 +56,6 @@ def prepare_examiner_prompt(background_by_user: str) -> str:
     return examiner_prompt
 
 
-############################################################
-def prepare_prompt(raw_prompt, background_by_user: str) -> str:
-    """
-    Prepares an extra piece of text for the LLM in case the user provided some background
-    """
-
-    if background_by_user:
-        background = f"Besides the csv data, the user also provided this background information: {str(background_by_user)}"
-    else:
-        background = ""
-
-    updated_prompt = raw_prompt.format(background=background)
-
-    return updated_prompt
-
-
 ##############################################################
 def build_model_from_structure(structure: SingleCSVStructure):
 
