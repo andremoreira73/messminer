@@ -42,7 +42,7 @@ def prepare_examiner_prompt(background_by_user: str) -> str:
     """
 
     if background_by_user:
-        background = f"Besides the csv data, the user also provided this background information:{str(background_by_user)}"
+        background = f"Besides the csv data, the user also provided this background information: {str(background_by_user)}"
     else:
         background = ""
 
