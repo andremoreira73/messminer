@@ -5,9 +5,22 @@ from io import StringIO
 
 from pydantic import create_model, Field
 
-from prompts import examiner_prompt_template
-from classes import SingleCSVStructure
+from classes import SingleCSVStructure, OverallState
 
+
+##############################################################
+def build_model_from_structure(structure: SingleCSVStructure):
+
+    type_map = {"str": str, "int": int, "float": float, "bool": bool}
+    
+    fields = {}
+    for f in structure.fields:
+        py_type = type_map[f.field_type]
+        if f.optional:
+            py_type = py_type | None
+        fields[f.name] = (py_type, Field(..., description=f.description, json_schema_extra={"original_name": f.original_name}))
+    
+    return create_model("DynamicModel", **fields)
 
 
 ########################################################
@@ -40,48 +53,10 @@ def load_excel_as_csv(file_path: str) -> dict[str, str]:
     return sheets_as_csv
 
 
-############################################################
-def prepare_examiner_prompt(background_by_user: str) -> str:
-    """
-    Prepares an extra piece of text for the LLM in case the user provided some background
-    """
 
-    if background_by_user:
-        background = f"Besides the csv data, the user also provided this background information: {str(background_by_user)}"
-    else:
-        background = ""
+##############################################################################################################
+def save_cleaned_data(graph_result, file_path: str):
+    with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
+        for cleaned in graph_result['cleaned_csv']:
+            cleaned['data_frame'].to_excel(writer, sheet_name=cleaned['sheet_name'], index=False)
 
-    examiner_prompt = examiner_prompt_template.format(background=background)
-
-    return examiner_prompt
-
-
-############################################################
-def prepare_prompt(raw_prompt, background_by_user: str) -> str:
-    """
-    Prepares an extra piece of text for the LLM in case the user provided some background
-    """
-
-    if background_by_user:
-        background = f"Besides the csv data, the user also provided this background information: {str(background_by_user)}"
-    else:
-        background = ""
-
-    updated_prompt = raw_prompt.format(background=background)
-
-    return updated_prompt
-
-
-##############################################################
-def build_model_from_structure(structure: SingleCSVStructure):
-
-    type_map = {"str": str, "int": int, "float": float, "bool": bool}
-    
-    fields = {}
-    for f in structure.fields:
-        py_type = type_map[f.field_type]
-        if f.optional:
-            py_type = py_type | None
-        fields[f.name] = (py_type, Field(..., description=f.description, json_schema_extra={"original_name": f.original_name}))
-    
-    return create_model("DynamicModel", **fields)

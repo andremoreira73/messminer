@@ -46,18 +46,3 @@ Your task is to extract the data from the provided csv and its structure.
 
 
 
-
-
-
-################## FOR INSPIRATION ONLY !!!
-system_prompt_template_v1 = """Attached is a CSV file containing several sheets.
-Attached is a CSV file containing several sheets with information in German about {equipment_type}.
-
-Instructions:
-1. Find the header row (not necessarily the topmost row) - it contains column names
-2. Extract information from each row below the header - each row = one piece of equipment
-3. Work row by row downwards from the header
-
-Special notes:
-- Return all extracted data in English
-"""

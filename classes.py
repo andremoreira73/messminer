@@ -26,18 +26,21 @@ class SingleCSVStructure(BaseModel):
     sheet_name: Optional[str] = Field(None, description="Name of the source sheet")
     fields: list[FieldDefinition] = Field(..., description="List of field definitions for the table")
 
+class SingleCSVClean(TypedDict):
+    # This is the cleaned dataframe, including its sheet name
+    # We don't need to use pydantic here, as this will not be part of a structured output
+    sheet_name: str
+    data_frame: pd.DataFrame
+
 ## States
 
 # We create a "private" state for a single csv processing
 # Needed for the map-reduce via Send 
 class SingleCSVState(TypedDict):
-    # shared information with OverallState 
     user_background: str
-    csv_structure: SingleCSVStructure
-    
-    # information that will not be passed back to OverallState
-    sheet_name: str  # will be shared with SingleCSVStructure for future reference
+    sheet_name: str
     sheet_value: str
+    csv_structure: SingleCSVStructure
 
 
 class OverallState(TypedDict):
@@ -50,4 +53,4 @@ class OverallState(TypedDict):
     # Annotated type with operator.add ensures that new messages are appended to the existing list rather than replacing it.
     # See: https://docs.langchain.com/oss/python/langgraph/quickstart#2-define-state
     csv_structure: Annotated[List[SingleCSVStructure], operator.add]
-    cleaned_csv: Annotated[List[pd.DataFrame], operator.add]
+    cleaned_csv: Annotated[List[SingleCSVClean], operator.add]
