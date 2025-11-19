@@ -10,7 +10,15 @@ from classes import SingleCSVStructure, OverallState
 
 ##############################################################
 def build_model_from_structure(structure: SingleCSVStructure):
+    """
+    Dynamically create a Pydantic model from a CSV structure definition.
 
+    Args:
+        structure: SingleCSVStructure containing field definitions
+
+    Returns:
+        Pydantic model class with fields matching the structure
+    """
     type_map = {"str": str, "int": int, "float": float, "bool": bool}
     
     fields = {}
@@ -56,6 +64,13 @@ def load_excel_as_csv(file_path: str) -> dict[str, str]:
 
 ##############################################################################################################
 def save_cleaned_data(graph_result, file_path: str):
+    """
+    Save cleaned DataFrames to an Excel file with multiple sheets.
+
+    Args:
+        graph_result: Graph output containing 'cleaned_csv' list of DataFrames
+        file_path: Output Excel file path
+    """
     with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
         for cleaned in graph_result['cleaned_csv']:
             cleaned['data_frame'].to_excel(writer, sheet_name=cleaned['sheet_name'], index=False)

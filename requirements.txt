@@ -1,35 +1,21 @@
+# Core data handling
+pandas>=2.0.0
+openpyxl>=3.1.0  # Excel file support
+python-dotenv>=1.0.0  # Environment variables
 
-# AI/LLM packages - Updated versions from your environment
-openai==1.68.2
-langchain==0.3.26  
-langchain-core==0.3.68 
-langchain-anthropic==0.3.7
-langchain-openai==0.3.5
-langchain-google-genai==2.1.7  # New
-langchain-text-splitters==0.3.8
-langsmith==0.4.5  # Works with langchain 0.3.26
-tiktoken==0.9.0
+# LLM/AI framework
+langchain>=0.3.26
+langchain-core>=0.3.68
+langchain-google-genai>=2.1.7  # Gemini models
+langsmith>=0.4.5  # Observability
 
-# LangGraph (if you use it)
-langgraph==0.4.7
-langgraph-checkpoint==2.0.26
-langgraph-checkpoint-sqlite==2.0.10
+# Agent orchestration
+langgraph>=0.4.7
+langgraph-checkpoint>=2.0.26
+langgraph-checkpoint-sqlite>=2.0.10
 
-# Google AI dependencies
-google-ai-generativelanguage==0.6.18
-google-api-core==2.25.1
-google-auth==2.40.3
-googleapis-common-protos==1.70.0
-proto-plus==1.26.1
-protobuf==6.31.1
-grpcio==1.73.1
-grpcio-status==1.73.1
-cachetools==5.5.2
-pyasn1==0.6.1
-pyasn1-modules==0.4.2
-rsa==4.9.1
+# Data validation
+pydantic>=2.10.0
 
-# Supporting packages for AI
-pydantic==2.10.6
-pydantic-core==2.27.2
-typing-extensions==4.12.2
+# Notebook support
+ipython>=8.0.0

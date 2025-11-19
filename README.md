@@ -1,11 +1,13 @@
-# MessMiner
+# The MessMiner
 
-An AI-powered agent workflow that mines and structures data from messy sources, transforming unstructured or poorly formatted data into clean, analyzable tables.
+Agents that turn nightmare Excel sheets into clean tables
 
 **Author:** Andre Moreira, November 2025
 **Version:** 0.1.0-beta
 
-## What is MessMiner?
+How often do you have that Excel file with exactly the data you need, but in a format you cannot really use? The data is scattered across sheets and files, or mixed with charts, formulas and merged cells. But it still has the data you **really** need.
+
+## The agent workflow that cleans your data
 
 MessMiner is an intelligent data cleaning tool that uses Large Language Models (LLMs) to understand and restructure messy data sources. Instead of manually writing complex parsing logic for each data format, MessMiner analyzes the structure of your data and intelligently extracts it into clean, structured tables.
 
@@ -14,21 +16,11 @@ MessMiner is an intelligent data cleaning tool that uses Large Language Models (
 - **Intelligent Structure Detection**: Uses LLMs to analyze and understand data organization
 - **Parallel Processing**: Handles multiple sheets/data sources simultaneously using map-reduce patterns
 - **Context-Aware**: Accepts user background information to guide the cleaning process
-- **Flexible**: Works with various data formats and structures without custom parsing code
-- **Observable**: Integration with LangSmith for workflow monitoring and debugging
+- **Flexible**: Works Excel files without custom parsing code
+- **Observable**: Optional integration with LangSmith for workflow monitoring and debugging
 - **Validated Output**: Uses Pydantic for structured response parsing and data validation
 
-## Technology Stack
-
-- **Python**: 3.11
-- **LangGraph**: Agent orchestration and workflow management
-- **LangSmith**: Observability and tracing
-- **LLMs**: Google Gemini (2.5 Pro, 2.5 Flash)
-- **Pydantic**: Structured response parsing and validation
-- **Pandas**: Data manipulation
-- **Development**: Claude Code for brainstorming and code assistance
-
-## How It Works
+### How It Works
 
 MessMiner uses a three-node graph workflow:
 
@@ -51,22 +43,22 @@ START → Node 1 (Upload) → Node 2 (Examiner) → Node 3 (Extractor) → END
    - Analyzes CSV data structure
    - Identifies relevant columns and data organization
    - Creates field definitions (name, type, description)
-   - Processes sheets in parallel using Send pattern
+   - Processes sheets in parallel (uses LangGraph's Send pattern)
 
 3. **Node 3: Extractor**
    - Dynamically builds Pydantic models based on examiner results
    - Extracts data according to identified structure
    - Cleans data (removes empty rows, validates types)
-   - Generates clean pandas DataFrames
-   - Processes sheets in parallel using Send pattern
+   - Generates clean pandas DataFrames that can be saved as cleaned Excel file
+   - Processes sheets in parallel
 
 ## Installation
 
 1. Clone this repository:
 
 ```bash
-git clone <repository-url>
-cd Agents_capstone_Kaggle_2025
+git clone https://github.com/andremoreira73/messminer.git
+cd messminer
 ```
 
 2. Install dependencies:
@@ -137,6 +129,10 @@ model_config_examiner = {
 }
 ```
 
+If you prefer to use other models, add their configuration parameters here
+(see documentation here https://docs.langchain.com/oss/python/integrations/chat)
+and add the respective API keys to the .env file
+
 ## Project Structure
 
 ```
@@ -153,23 +149,23 @@ model_config_examiner = {
 
 ## Examples
 
-The repository includes three example files demonstrating different use cases:
+The repository includes three anonymized example files demonstrating different use cases:
 
 - **Example_0.xlsx**: Agricultural data with empty rows
 - **Example_1.xlsx**: Technical/price data in German
 - **Example_2.xlsx**: Trial management software output
 
-## State Management
+## Agent Workflow State Management
 
 ### OverallState
 
 Tracks the entire workflow state:
 
-- `user_background`: Context information
+- `user_background`: Context information provided by the user
 - `file_name`: Input file path
 - `sheets_as_csv`: Dictionary of sheet names to CSV strings
-- `csv_structure`: List of identified structures (accumulated via operator.add)
-- `cleaned_csv`: List of cleaned DataFrames (accumulated via operator.add)
+- `csv_structure`: List of identified structures
+- `cleaned_csv`: List of cleaned DataFrames
 
 ### SingleCSVState
 
@@ -180,57 +176,38 @@ Used for parallel processing of individual sheets:
 - `sheet_value`: CSV data as string
 - `csv_structure`: Structure definition for this sheet
 
-## Observability
+## Technology Stack
 
-LangSmith integration is enabled by default. View your workflow traces at:
-https://eu.api.smith.langchain.com
+- **Python**: 3.11
+- **LangGraph**: Agent orchestration and workflow management
+- **LangSmith**: Observability and tracing
+- **LLMs**: Google Gemini (2.5 Pro, 2.5 Flash)
+- **Pydantic**: Structured response parsing and validation
+- **Development**: Claude Code for brainstorming and code assistance
 
-Configure in the notebook:
+**Observability**: LangSmith integration is enabled by default. Configure in the notebook:
 
 ```python
 os.environ["LANGSMITH_ENDPOINT"] = "https://eu.api.smith.langchain.com"
-os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_TRACING_V2"] = "true"  # set to "false" if you do not want tracing
 os.environ["LANGCHAIN_PROJECT"] = "MessMiner_v2"
 ```
 
-## Development
-
-The notebook uses autoreload for easier development:
-
-```python
-%load_ext autoreload
-%autoreload 2
-```
-
-This automatically reloads imported modules when they change, eliminating the need to restart the kernel during development.
-
-## Next Steps (Roadmap)
-
-- [ ] Support for additional file formats (CSV, JSON, etc.)
-- [ ] Web interface for non-technical users
-- [ ] Batch processing capabilities
-- [ ] Custom validation rules
-- [ ] Export to multiple formats (JSON, SQL, etc.)
-- [ ] Performance optimization for large datasets
-- [ ] Support for additional LLM providers
-
 ## License
 
-[Add your license information here]
+MIT License © 2025 Andre Moreira - See LICENSE file for details
 
 ## Citation
 
-If you use MessMiner in your research or projects, please cite:
+If you use MessMiner, please cite:
 
 ```
-MessMiner - AI-Powered Data Structure Mining
+MessMiner
 Author: Andre Moreira
 Year: 2025
 ```
 
 ## Contributing
-
-[Add contribution guidelines if applicable]
 
 ## Troubleshooting
 
@@ -241,10 +218,6 @@ Year: 2025
 3. **Structure Detection Issues**: Provide more detailed context in `user_context`
 4. **Empty Results**: Check LangSmith traces to debug workflow execution
 
-## Support
+## Support, Feedback
 
-[Add support contact information or issue tracker link]
-
----
-
-Built with LangGraph and Claude Code
+Reach out to a.moreira@lyfx.ai
