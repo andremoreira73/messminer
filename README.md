@@ -209,14 +209,8 @@ Year: 2025
 
 ## Contributing
 
-## Troubleshooting
-
-### Common Issues
-
-1. **API Key Errors**: Ensure your `.env` file contains valid API keys
-2. **Model Timeout**: Try switching from Gemini Pro to Flash for faster processing
-3. **Structure Detection Issues**: Provide more detailed context in `user_context`
-4. **Empty Results**: Check LangSmith traces to debug workflow execution
+This is a passion project - feel free to fork it, experiment, and submit pull requests!
+I review contributions when time allows, but maintenance is best-effort. Consider this an invitation to make it your own.
 
 ## Support, Feedback
 
