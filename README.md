@@ -1,4 +1,4 @@
-# The MessMiner
+# The Mess Miner
 
 Agents that turn nightmare Excel sheets into clean tables
 
@@ -24,11 +24,7 @@ MessMiner is an intelligent data cleaning tool that uses Large Language Models (
 
 MessMiner uses a three-node graph workflow:
 
-```
-START → Node 1 (Upload) → Node 2 (Examiner) → Node 3 (Extractor) → END
-                              ↓ (parallel)         ↓ (parallel)
-                           [Send pattern for multiple sheets]
-```
+![MessMiner Workflow](MessMiner_workflow.png)
 
 ### Workflow Nodes
 
