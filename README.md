@@ -72,6 +72,10 @@ cp .env.example .env
 # - LANGCHAIN_API_KEY (for LangSmith)
 ```
 
+### Claude
+
+I left CLAUDE.md out of .gitignore, so if you happen to use Claude Code (or any other AI tools that use it) you can just jump in, no need to burn tokens with /init
+
 ## Usage
 
 ### Basic Usage
