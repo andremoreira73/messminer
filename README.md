@@ -24,7 +24,9 @@ MessMiner is an intelligent data cleaning tool that uses Large Language Models (
 
 MessMiner uses a three-node graph workflow:
 
-![MessMiner Workflow](MessMiner_workflow.png)
+<p align="center">
+  <img src="MessMiner_workflow.png" alt="MessMiner Workflow" width="700">
+</p>
 
 ### Workflow Nodes
 
