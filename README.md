@@ -204,13 +204,41 @@ If you use MessMiner, please cite:
 ```
 MessMiner
 Author: Andre Moreira
-Year: 2025
+November 2025
 ```
+
+## To Dos
+
+MessMiner is currently a demo, not production-ready. Future improvement ideas:
+
+**Production Hardening**
+
+- Robust error handling
+- Token usage monitoring and caps
+- Sheet processing limits
+- User-friendly interface
+
+**Schema Reuse**
+
+- Consolidate multiple sheets using the same structure
+- Save and reuse examined schemas to skip Node 2 in future runs
+- Store inferred schemas alongside cleaned tables
+
+**Format Extensions**
+
+- Support PowerPoint and Word files (yes, people store data there)
+
+**Community Tool Vision**
+
+- Django web application with containerized deployment
+- Users bring their own LLM and API keys
+- Self-hosted or cloud-based options
 
 ## Contributing
 
-This is a passion project - feel free to fork it, experiment, and submit pull requests!
-I review contributions when time allows, but maintenance is best-effort. Consider this an invitation to make it your own.
+Contributions are welcome! Fork the repository, experiment with improvements, and submit pull requests for features, bug fixes, or documentation enhancements.
+
+**Note on Maintenance**: This project is maintained on a best-effort basis. Pull requests are reviewed as time permits, so response times may vary. The codebase is open for you to adapt and extend for your own use cases.
 
 ## Support, Feedback
 
