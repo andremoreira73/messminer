@@ -9,7 +9,7 @@ How often do you have that Excel file with exactly the data you need, but in a f
 
 ## The agent workflow that cleans your data
 
-MessMiner is an intelligent data cleaning tool that uses Large Language Models (LLMs) to understand and restructure messy data sources. Instead of manually writing complex parsing logic for each data format, MessMiner analyzes the structure of your data and intelligently extracts it into clean, structured tables.
+Mess Miner is an intelligent data cleaning tool that uses Large Language Models (LLMs) to understand and restructure messy data sources. Instead of manually writing complex parsing logic for each data format, Mess Miner analyzes the structure of your data and intelligently extracts it into clean, structured tables.
 
 ### Key Features
 
@@ -22,9 +22,9 @@ MessMiner is an intelligent data cleaning tool that uses Large Language Models (
 
 ### How It Works
 
-MessMiner uses a three-node graph workflow:
+Mess Miner uses a three-node graph workflow:
 
-![MessMiner Workflow](MessMiner_workflow.png)
+![Mess Miner Workflow](MessMiner_workflow.png)
 
 ### Workflow Nodes
 
@@ -199,17 +199,17 @@ MIT License © 2025 Andre Moreira - See LICENSE file for details
 
 ## Citation
 
-If you use MessMiner, please cite:
+If you use Mess Miner, please cite:
 
 ```
-MessMiner
+Mess Miner
 Author: Andre Moreira
 November 2025
 ```
 
 ## To Dos
 
-MessMiner is currently a demo, not production-ready. Future improvement ideas:
+Mess Miner is currently a demo, not production-ready. Future improvement ideas:
 
 **Production Hardening**
 
