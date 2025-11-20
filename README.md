@@ -1,6 +1,6 @@
 # The Mess Miner
 
-Agents that turn nightmare Excel sheets into clean tables
+Agents that turn nightmare Excel sheets into organized tables
 
 **Author:** Andre Moreira, November 2025
 **Version:** 0.1.0-beta
