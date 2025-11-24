@@ -47,7 +47,8 @@ class OverallState(TypedDict):
     user_background: str
     file_name: str
     # Each sheet in the file is extracted as a csv, put in this dict with "sheet_name":"extracted_csv"
-    sheets_as_csv: dict  
+    sheets_as_csv: dict
+    consolidate_sheets: bool
     
     # The list of csv structures will be built by agents working in parallel (one per extracted csv), therefore it needs to allow appending;
     # Annotated type with operator.add ensures that new messages are appended to the existing list rather than replacing it.

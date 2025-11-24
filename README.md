@@ -81,18 +81,33 @@ I left CLAUDE.md out of .gitignore, so if you happen to use Claude Code (or any 
 ### Basic Usage
 
 1. Open `MessMiner.ipynb` in Jupyter
-2. Configure your input file and user context:
+2. Executing the cells under the sections
+
+- Imports
+- Observability
+- Node 1: uploader
+- Node 2: examiner
+- Node 3: extractor
+- Putting it all together: the Graph
+
+(note that there are "testing areas" under the different sections - these are optional, good for learning / testing)
+
+3. Go to the section _User inputs_ and configure:
 
 ```python
 input_file = 'Example_0.xlsx'
 output_file = 'Example_0_output.xlsx'
+
+# if you want all sheets into one consolidated, organized table, set it to True;
+# otherwise, the workflow will treat each sheet separately
+consolidate_sheets = False
 
 # Optional: Provide context to guide the cleaning
 user_context = """The file contains agricultural data that is almost
 correctly structured, but has empty rows. I need a clean, contiguous table."""
 ```
 
-3. Run the workflow:
+3. Run the workflow (cell under _User Inputs_):
 
 ```python
 initial_state = {

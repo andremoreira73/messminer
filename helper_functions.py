@@ -32,12 +32,13 @@ def build_model_from_structure(structure: SingleCSVStructure):
 
 
 ########################################################
-def load_excel_as_csv(file_path: str) -> dict[str, str]:
+def load_excel_as_csv(file_path: str, consolidate_sheets: bool) -> dict[str, str]:
     """
     Load an Excel file and convert each sheet to CSV text format.
 
     Args:
         file_path: Path to the Excel file
+        consolidate_sheets: boolean, check if user wants a consolidated final table
 
     Returns:
         Dictionary mapping sheet names to their CSV string representations
@@ -46,19 +47,29 @@ def load_excel_as_csv(file_path: str) -> dict[str, str]:
     excel_file = pd.ExcelFile(file_path)
 
     sheets_as_csv = {}
+    sheets_as_csv_consolidated = []
 
     for sheet_name in excel_file.sheet_names:
         # Read the sheet
-        df = pd.read_excel(file_path, sheet_name=sheet_name)
+        #df = pd.read_excel(file_path, sheet_name=sheet_name)
+        df = excel_file.parse(sheet_name)
 
         # Convert to CSV string (not DataFrame)
         csv_buffer = StringIO()
         df.to_csv(csv_buffer, index=False)
         csv_string = csv_buffer.getvalue()
 
-        sheets_as_csv[sheet_name] = csv_string
+        if consolidate_sheets:
+            # Since we will be passing this as text to an LLM, it is OK if the columns do not match,
+            # simply append one after the other
+            sheets_as_csv_consolidated.append(csv_string)
+        else:
+            sheets_as_csv[sheet_name] = csv_string
 
-    return sheets_as_csv
+    # Check if user wants all sheets to be treated "as one" and get one final table
+    result = {"consolidated table": "\n".join(sheets_as_csv_consolidated)} if consolidate_sheets else sheets_as_csv
+
+    return result
 
 
 
